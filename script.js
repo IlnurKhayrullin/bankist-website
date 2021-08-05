@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////
 // Modal window
-
+const header = document.querySelector('header');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -19,8 +19,7 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -30,3 +29,17 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.innerHTML =
+  'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
+header.append(message);
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', () => message.remove());
+
+message.style.backgroundColor = '#37383D';
+message.style.width = '102%';
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
